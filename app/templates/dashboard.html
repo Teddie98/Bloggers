@@ -1,0 +1,54 @@
+{% from "new_blog.html" import new_blog with context %}
+{% from "blogs.html" import all_blogs with context %}
+{% extends 'layout.html' %}
+{% block content %}
+<div class="dashboard">
+    <div class="side-bar border-right border-secondary pl-2">
+        <h1>{{title}}</h1>
+        <ul class="d-block pl-0">
+            <li>
+                <a class="nav-link posts-options" data-toggle='collapse' data-target='#posts' aria-expanded="false"
+                    href="#">Posts</a>
+                <ul id="posts" class="collapse">
+                    <li>
+                        <a class="all-posts" onclick="clicked()" href="">all</a>
+                    </li>
+                    <li>
+                        <a class="draft-posts" href="">draft</a>
+                    </li>
+                    <li>
+                        <a class="published-posts" href="">published</a>
+                    </li>
+                </ul>
+
+            </li>
+            <li>
+                <a class="nav-link" href="#">Comments</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#">Stats</a>
+            </li>
+            <li>
+                <a class="nav-link" href="#">Settings</a>
+            </li>
+        </ul>
+    </div>
+    <div class="main px-3 ml-3">
+        <div class="dash-content">
+            <div class=" mb-3">
+                <a href="#new-blog-form" on-click="newBlogForm()" class="text-light m-0 btn btn-success new-blog-btn">
+                    New Blog Post
+                </a>
+            </div>
+            <div class="blog-form d-none new-blog">
+                {{ new_blog(form) }}
+            </div>
+            <div class="all-blogs dn">
+                {{ edit_form.csrf_token }}
+                {{ all_blogs(blogs, del_form, edit_form) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
